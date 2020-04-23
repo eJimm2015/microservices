@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/healthcheck")
+@RequestMapping("/api")
 public class RestApi {
-    @GetMapping
+    @GetMapping("/healthcheck")
     public String healthcheck(){
         return "Knock knock Neo, The Matrix has you ...";
     }
