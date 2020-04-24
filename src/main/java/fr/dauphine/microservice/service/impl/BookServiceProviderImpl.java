@@ -1,0 +1,60 @@
+package fr.dauphine.microservice.service.impl;
+
+import fr.dauphine.microservice.model.Book;
+import fr.dauphine.microservice.repository.BookRepository;
+import fr.dauphine.microservice.service.BookServiceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.Optional;
+
+public class BookServiceProviderImpl implements BookServiceProvider {
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Override
+    public Book create(Book book) {
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> getAll() {
+        return bookRepository.findAll();
+    }
+
+    @Override
+    public Optional<Book> findByIsbn(String isbn) {
+        return bookRepository.findById(isbn);
+    }
+
+    @Override
+    public List<Book> findByAuthor(String authorName) {
+        return bookRepository.findByAuthor(authorName);
+    }
+
+    @Override
+    public List<Book> findByEditor(String editor) {
+        return bookRepository.findByEditor(editor);
+    }
+
+    @Override
+    public List<Book> findByEdition(int year) {
+        return bookRepository.findByEdition(year);
+    }
+
+    @Override
+    public List<Book> findByTitle(String title) {
+        return bookRepository.findByTitle(title);
+    }
+
+    @Override
+    public void update(Book book) {
+        bookRepository.save(book);
+    }
+
+    @Override
+    public void delete(Book book) {
+        bookRepository.delete(book);
+    }
+}

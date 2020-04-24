@@ -1,0 +1,41 @@
+package fr.dauphine.microservice.service.impl;
+
+import fr.dauphine.microservice.model.Loan;
+import fr.dauphine.microservice.model.Reader;
+import fr.dauphine.microservice.repository.LoanRepository;
+import fr.dauphine.microservice.service.LoanServiceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
+import java.util.List;
+
+public class LoanServiceProviderImpl implements LoanServiceProvider {
+
+    @Autowired
+    private LoanRepository loanRepository;
+
+    @Override
+    public Loan create(Loan loan) {
+        return loanRepository.save(loan);
+    }
+
+    @Override
+    public Loan returnBook(Loan loan) {
+        return loanRepository.save(loan);
+    }
+
+    @Override
+    public List<Loan> findByBorrowingDate(Date date) {
+        return loanRepository.findByBorrowDate(date);
+    }
+
+    @Override
+    public List<Loan> getAllBorrowedBooks() {
+        return loanRepository.findByReturnDateNull();
+    }
+
+    @Override
+    public List<Loan> getHistoryByReader(Reader reader) {
+        return loanRepository.findByReader(reader);
+    }
+}
