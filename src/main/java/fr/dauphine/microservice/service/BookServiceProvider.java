@@ -1,12 +1,11 @@
 package fr.dauphine.microservice.service;
 
 import fr.dauphine.microservice.model.Book;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 public interface BookServiceProvider {
     Book create(final Book book);
     List<Book> getAll();

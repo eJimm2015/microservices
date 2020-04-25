@@ -71,4 +71,15 @@ public class Book {
     public int hashCode() {
         return Objects.hash(isbn);
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn='" + isbn + '\'' +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", editor='" + editor + '\'' +
+                ", edition=" + edition +
+                '}';
+    }
 }

@@ -5,10 +5,12 @@ import fr.dauphine.microservice.model.Reader;
 import fr.dauphine.microservice.repository.LoanRepository;
 import fr.dauphine.microservice.service.LoanServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class LoanServiceProviderImpl implements LoanServiceProvider {
 
     @Autowired

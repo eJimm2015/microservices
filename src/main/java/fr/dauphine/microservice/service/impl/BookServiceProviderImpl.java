@@ -4,10 +4,12 @@ import fr.dauphine.microservice.model.Book;
 import fr.dauphine.microservice.repository.BookRepository;
 import fr.dauphine.microservice.service.BookServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BookServiceProviderImpl implements BookServiceProvider {
 
     @Autowired

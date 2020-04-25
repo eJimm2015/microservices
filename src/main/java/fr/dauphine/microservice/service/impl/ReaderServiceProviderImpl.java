@@ -4,7 +4,9 @@ import fr.dauphine.microservice.model.Reader;
 import fr.dauphine.microservice.repository.ReaderRepository;
 import fr.dauphine.microservice.service.ReaderServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReaderServiceProviderImpl implements ReaderServiceProvider {
 
     @Autowired
