@@ -7,15 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequestMapping("/books")
 public class BookApi {
-/*
-    void update(final Book book);
-    void delete(final Book book);
-*/
+    
     @Autowired
     private BookServiceProvider bookServiceProvider;
 
@@ -26,12 +24,16 @@ public class BookApi {
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> findBy(@RequestParam(value = "author", required = false) String author,
+    public ResponseEntity<List<Book>> findBy(@RequestParam(value = "isbn", required = false) String isbn,
+                                             @RequestParam(value = "author", required = false) String author,
                                              @RequestParam(value = "editor", required = false) String editor,
                                              @RequestParam(value = "title", required = false) String title,
                                              @RequestParam(value = "edition", required = false) Integer edition) {
         List<Book> books;
-        if(author != null) books = bookServiceProvider.findByAuthor(author);
+        if(isbn != null) books = bookServiceProvider.findByIsbn(isbn)
+                                                    .map(Collections::singletonList)
+                                                    .orElse(Collections.emptyList());
+        else if(author != null) books = bookServiceProvider.findByAuthor(author);
         else if(editor != null) books = bookServiceProvider.findByEditor(editor);
         else if(title != null) books = bookServiceProvider.findByTitle(title);
         else if(edition != null) books = bookServiceProvider.findByEdition(edition);
@@ -44,7 +46,7 @@ public class BookApi {
         return ResponseEntity.ok().build();
     }
     @DeleteMapping("{isbn}")
-    public ResponseEntity<Void> update(@PathVariable String isbn) {
+    public ResponseEntity<Void> delete(@PathVariable String isbn) {
         bookServiceProvider.delete(new Book().setIsbn(isbn));
         return ResponseEntity.ok().build();
     }
