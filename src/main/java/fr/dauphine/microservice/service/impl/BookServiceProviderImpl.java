@@ -51,8 +51,8 @@ public class BookServiceProviderImpl implements BookServiceProvider {
     }
 
     @Override
-    public void update(Book book) {
-        bookRepository.save(book);
+    public Book update(Book book) {
+        return bookRepository.save(book);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package fr.dauphine.microservice.model;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Book {
+public class Book extends RepresentationModel<Book> {
     @Id
     private String isbn;
 
@@ -82,4 +84,6 @@ public class Book {
                 ", edition=" + edition +
                 '}';
     }
+
+
 }

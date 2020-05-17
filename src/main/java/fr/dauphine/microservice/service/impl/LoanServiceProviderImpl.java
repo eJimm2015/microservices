@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LoanServiceProviderImpl implements LoanServiceProvider {
@@ -39,5 +40,10 @@ public class LoanServiceProviderImpl implements LoanServiceProvider {
     @Override
     public List<Loan> getHistoryByReader(Reader reader) {
         return loanRepository.findByReader(reader);
+    }
+
+    @Override
+    public Optional<Loan> getById(Integer id) {
+        return loanRepository.findById(id);
     }
 }

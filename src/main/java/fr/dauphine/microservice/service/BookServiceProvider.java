@@ -14,6 +14,6 @@ public interface BookServiceProvider {
     List<Book> findByEditor(final String editor);
     List<Book> findByEdition(final int year);
     List<Book> findByTitle(final String title);
-    void update(final Book book);
+    Book update(final Book book);
     void delete(final Book book);
 }

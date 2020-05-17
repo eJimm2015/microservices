@@ -3,13 +3,16 @@ package fr.dauphine.microservice.api;
 import fr.dauphine.microservice.model.Reader;
 import fr.dauphine.microservice.service.ReaderServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("/readers")
@@ -19,10 +22,22 @@ public class ReaderApi {
     private ReaderServiceProvider readerServiceProvider;
 
     @PostMapping
-    public ResponseEntity<Reader> create(@RequestBody Reader reader) {
+    public ResponseEntity<EntityModel<Reader>> create(@RequestBody Reader reader) {
         Reader created = readerServiceProvider.create(reader);
-        return ResponseEntity
-                .created(URI.create(String.format("/api/readers/%s", created.getId())))
-                .body(created);
+        Link link = getLink(created.getId());
+        return new ResponseEntity<>(new EntityModel<>(created, link), CREATED);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<EntityModel<Reader>> getById(@PathVariable("id") Integer id) {
+        Optional<Reader> readerOptional = readerServiceProvider.getById(id);
+        Reader reader = readerOptional.orElse(new Reader());
+        Link link = getLink(id);
+        return new ResponseEntity<>(new EntityModel<>(reader, link), CREATED);
+    }
+
+    private Link getLink(Integer id) {
+        return linkTo(methodOn(ReaderApi.class)
+                .getById(id)).withSelfRel();
     }
 }

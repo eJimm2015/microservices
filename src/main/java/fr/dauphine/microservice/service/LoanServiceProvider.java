@@ -5,6 +5,7 @@ import fr.dauphine.microservice.model.Reader;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 public interface LoanServiceProvider {
@@ -13,4 +14,5 @@ public interface LoanServiceProvider {
     List<Loan> findByBorrowingDate(final Date date);
     List<Loan> getAllBorrowedBooks();
     List<Loan> getHistoryByReader(final Reader reader);
+    Optional<Loan> getById(final Integer id);
 }

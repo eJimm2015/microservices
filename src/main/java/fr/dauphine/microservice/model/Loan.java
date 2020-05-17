@@ -1,5 +1,7 @@
 package fr.dauphine.microservice.model;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -7,15 +9,15 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Loan {
+public class Loan extends RepresentationModel<Loan> {
     @Id
-    private String id;
+    private Integer id;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public Loan setId(String id) {
+    public Loan setId(Integer id) {
         this.id = id;
         return this;
     }
