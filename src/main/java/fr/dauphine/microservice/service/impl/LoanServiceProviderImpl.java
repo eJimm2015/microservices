@@ -24,6 +24,7 @@ public class LoanServiceProviderImpl implements LoanServiceProvider {
 
     @Override
     public Loan returnBook(Loan loan) {
+        loan.setReturnDate(new Date());
         return loanRepository.save(loan);
     }
 
